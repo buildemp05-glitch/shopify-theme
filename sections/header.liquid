@@ -45,6 +45,7 @@
 
   capture logo
     content_for 'block', type: '_header-logo', id: 'header-logo'
+    echo '<span class="header__kd">KD</span>'
   endcapture
 
   capture menu
@@ -424,6 +425,13 @@
       /* reset style from base.css */
       transition: color var(--header-content-transition-timing), border-color var(--header-content-transition-timing);
     }
+  }
+
+  .header__kd {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-inline-start: var(--margin-sm);
   }
 
   #header-component :is(.header-menu, .dropdown-localization) {

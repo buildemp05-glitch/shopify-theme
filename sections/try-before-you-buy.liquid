@@ -1,0 +1,537 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section
+  class="section section--{{ section.settings.section_width }} spacing-style kd-support color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="kd-support__inner">
+    <div class="kd-support__content">
+      <h2 class="kd-support__title">
+        <span>{{ section.settings.title_line_1 }}</span>
+        <span class="kd-support__title-accent">{{ section.settings.title_line_2 }}</span>
+      </h2>
+
+      {% if section.settings.description != blank %}
+        <div class="kd-support__description rte">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      <div class="kd-support__actions">
+        {% if section.settings.primary_button_label != blank %}
+          <a
+            class="kd-support__button"
+            {% if section.settings.primary_button_link != blank %}
+              href="{{ section.settings.primary_button_link }}"
+            {% else %}
+              role="link"
+              aria-disabled="true"
+            {% endif %}
+          >
+            <span>{{ section.settings.primary_button_label }}</span>
+            <span aria-hidden="true">&#8594;</span>
+          </a>
+        {% endif %}
+
+        {% if section.settings.partner_label != blank %}
+          <div class="kd-support__partner">
+            {% if section.settings.partner_logo != blank %}
+              {{
+                section.settings.partner_logo
+                | image_url: width: 320
+                | image_tag:
+                  widths: '80,120,160,240,320',
+                  sizes: '(max-width: 749px) 120px, 160px',
+                  loading: 'lazy',
+                  class: 'kd-support__partner-image'
+              }}
+            {% endif %}
+            <p class="kd-support__partner-text">{{ section.settings.partner_label }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="kd-support__cards">
+      {% for block in section.blocks %}
+        <article
+          class="kd-support-card"
+          {{ block.shopify_attributes }}
+        >
+          <span class="kd-support-card__icon" aria-hidden="true">
+            {% if block.settings.icon == 'upgrade' %}
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 20H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path d="M6 17V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path d="M10 17V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path d="M14 17V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path d="M18 9L20 7L22 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            {% elsif block.settings.icon == 'store' %}
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 9L5 4H19L21 9V11C21 12.1046 20.1046 13 19 13C17.8954 13 17 12.1046 17 11C17 12.1046 16.1046 13 15 13C13.8954 13 13 12.1046 13 11C13 12.1046 12.1046 13 11 13C9.89543 13 9 12.1046 9 11C9 12.1046 8.10457 13 7 13C5.89543 13 5 12.1046 5 11C5 12.1046 4.10457 13 3 13C1.89543 13 1 12.1046 1 11V9H3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                <path d="M4 13V20H20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            {% else %}
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 4H10V10H4V4Z" stroke="currentColor" stroke-width="2" />
+                <path d="M14 4H20V10H14V4Z" stroke="currentColor" stroke-width="2" />
+                <path d="M4 14H10V20H4V14Z" stroke="currentColor" stroke-width="2" />
+                <path d="M14 14H20V20H14V14Z" stroke="currentColor" stroke-width="2" />
+              </svg>
+            {% endif %}
+          </span>
+
+          <h3 class="kd-support-card__title">{{ block.settings.title }}</h3>
+          {% if block.settings.description != blank %}
+            <p class="kd-support-card__description">{{ block.settings.description }}</p>
+          {% endif %}
+
+          {% if block.settings.button_label != blank %}
+            <a
+              class="kd-support-card__button"
+              {% if block.settings.button_link != blank %}
+                href="{{ block.settings.button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+            >
+              <span>{{ block.settings.button_label }}</span>
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          {% endif %}
+
+          <div class="kd-support-card__footer">
+            {% if block.settings.footer_text != blank %}
+              <p>{{ block.settings.footer_text }}</p>
+            {% endif %}
+            {% if block.settings.footer_link_label != blank %}
+              <a
+                class="kd-support-card__footer-link"
+                {% if block.settings.footer_link != blank %}
+                  href="{{ block.settings.footer_link }}"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+              >
+                <span>{{ block.settings.footer_link_label }}</span>
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .kd-support {
+    --kd-bg: #070707;
+    --kd-card-bg: #0c0c0c;
+    --kd-border: #2a2a2a;
+    --kd-gold: #d4a54c;
+    --kd-text: #f7f7f7;
+
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(1200px 420px at 88% -12%, rgb(212 165 76 / 0.16), transparent 52%),
+      linear-gradient(135deg, #040404 0%, #090909 62%, #0b0b0b 100%);
+    border-radius: 28px;
+  }
+
+  .kd-support::after {
+    content: '';
+    position: absolute;
+    inset: -30% -5% auto auto;
+    width: 460px;
+    height: 460px;
+    border: 1px solid rgb(212 165 76 / 0.15);
+    border-radius: 999px;
+    transform: rotate(-20deg);
+    pointer-events: none;
+  }
+
+  .kd-support__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .kd-support__content {
+    color: var(--kd-text);
+    max-width: 40rem;
+  }
+
+  .kd-support__title {
+    margin: 0;
+    display: grid;
+    gap: 0.15em;
+    font-size: clamp(2rem, 5.2vw, 4.35rem);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .kd-support__title-accent {
+    color: var(--kd-gold);
+  }
+
+  .kd-support__description {
+    margin-top: 1.2rem;
+    color: rgb(255 255 255 / 0.95);
+    font-size: clamp(1rem, 1.45vw, 1.55rem);
+    line-height: 1.35;
+    max-width: 34rem;
+  }
+
+  .kd-support__description p {
+    margin: 0 0 0.45rem;
+  }
+
+  .kd-support__description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .kd-support__actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2.2rem;
+  }
+
+  .kd-support__button,
+  .kd-support-card__button {
+    border: 1px solid var(--kd-gold);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    font-size: clamp(1rem, 1.4vw, 1.7rem);
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .kd-support__button {
+    padding: 0.9rem 1.6rem;
+    min-width: min(100%, 17rem);
+  }
+
+  .kd-support__button:hover,
+  .kd-support-card__button:hover {
+    background-color: rgb(212 165 76 / 0.12);
+    transform: translateY(-1px);
+  }
+
+  .kd-support__partner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #fff;
+  }
+
+  .kd-support__partner-image {
+    width: 56px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .kd-support__partner-text {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.15vw, 1.25rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .kd-support__cards {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .kd-support-card {
+    background: linear-gradient(180deg, rgb(12 12 12 / 0.98), rgb(9 9 9 / 0.98));
+    border: 1px solid var(--kd-border);
+    border-radius: 22px;
+    padding: 1.25rem;
+    color: var(--kd-text);
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .kd-support-card__icon {
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+    display: inline-flex;
+  }
+
+  .kd-support-card__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .kd-support-card__title {
+    margin: 0;
+    color: var(--kd-gold);
+    font-size: clamp(1.6rem, 2.3vw, 2.9rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .kd-support-card__description {
+    margin: 0;
+    font-size: clamp(0.95rem, 1.2vw, 1.55rem);
+    line-height: 1.35;
+    color: rgb(255 255 255 / 0.95);
+    max-width: 18em;
+  }
+
+  .kd-support-card__button {
+    border-radius: 12px;
+    padding: 0.8rem 1.15rem;
+    width: 100%;
+    font-size: clamp(0.98rem, 1.2vw, 1.35rem);
+  }
+
+  .kd-support-card__footer {
+    margin-top: 0.2rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .kd-support-card__footer p {
+    margin: 0;
+    font-size: clamp(0.95rem, 1.08vw, 1.2rem);
+  }
+
+  .kd-support-card__footer-link {
+    color: var(--kd-gold);
+    font-size: clamp(0.95rem, 1.08vw, 1.2rem);
+    text-underline-offset: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    .kd-support__inner {
+      grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
+      gap: 1.7rem;
+      padding: clamp(2rem, 2.6vw, 3.2rem);
+    }
+
+    .kd-support__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .kd-support-card {
+      min-height: 100%;
+      padding: clamp(1.25rem, 1.6vw, 2rem);
+      gap: 1.05rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Try Before You Buy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title line 1",
+      "default": "Try Before You Buy"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title line 2",
+      "default": "Shopify Support"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Award-Winning Shopify Developers.</p><p>Fixes, Upgrades, New Builds &amp; Migrations</p><p>Work starts in hours, not weeks.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Book a Call"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "partner_logo",
+      "label": "Partner logo"
+    },
+    {
+      "type": "text",
+      "id": "partner_label",
+      "label": "Partner label",
+      "default": "Shopify Platinum Partner"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-6"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Page"
+        },
+        {
+          "value": "full-width",
+          "label": "Full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service_card",
+      "name": "Service card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "upgrade",
+              "label": "Upgrade"
+            },
+            {
+              "value": "store",
+              "label": "Store"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            }
+          ],
+          "default": "upgrade"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "I Need To Upgrade My Shopify Store"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Need to move fast? Get quote to complete any Shopify task."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Free Quote"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "footer_text",
+          "label": "Footer text",
+          "default": "Unsure where to start?"
+        },
+        {
+          "type": "text",
+          "id": "footer_link_label",
+          "label": "Footer link label",
+          "default": "Get a Free Audit"
+        },
+        {
+          "type": "url",
+          "id": "footer_link",
+          "label": "Footer link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Try Before You Buy",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "service_card",
+          "settings": {
+            "icon": "upgrade",
+            "title": "I Need To Upgrade My Shopify Store",
+            "description": "Need to move fast? Get quote to complete any Shopify task.",
+            "button_label": "Free Quote",
+            "footer_text": "Unsure where to start?",
+            "footer_link_label": "Get a Free Audit"
+          }
+        },
+        {
+          "type": "service_card",
+          "settings": {
+            "icon": "store",
+            "title": "I Need To Build A New Shopify Store",
+            "description": "Try Before You Buy Concept Design & Action Plan.",
+            "button_label": "Free Prototype",
+            "footer_text": "Looking to switch platforms?",
+            "footer_link_label": "Migrate to Shopify"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

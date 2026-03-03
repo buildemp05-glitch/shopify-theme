@@ -88,6 +88,48 @@
         "padding-block-end": 72
       }
     },
+    "try_before_you_buy_Mq8JtR": {
+      "type": "try-before-you-buy",
+      "blocks": {
+        "service_card_h5LxQ3": {
+          "type": "service_card",
+          "settings": {
+            "icon": "upgrade",
+            "title": "I Need To Upgrade My Shopify Store",
+            "description": "Need to move fast? Get quote to complete any Shopify task.",
+            "button_label": "Free Quote",
+            "footer_text": "Unsure where to start?",
+            "footer_link_label": "Get a Free Audit"
+          }
+        },
+        "service_card_Fx2mTu": {
+          "type": "service_card",
+          "settings": {
+            "icon": "store",
+            "title": "I Need To Build A New Shopify Store",
+            "description": "Try Before You Buy Concept Design & Action Plan.",
+            "button_label": "Free Prototype",
+            "footer_text": "Looking to switch platforms?",
+            "footer_link_label": "Migrate to Shopify"
+          }
+        }
+      },
+      "block_order": [
+        "service_card_h5LxQ3",
+        "service_card_Fx2mTu"
+      ],
+      "settings": {
+        "title_line_1": "Try Before You Buy",
+        "title_line_2": "Shopify Support",
+        "description": "<p>Award-Winning Shopify Developers.</p><p>Fixes, Upgrades, New Builds &amp; Migrations</p><p>Work starts in hours, not weeks.</p>",
+        "primary_button_label": "Book a Call",
+        "partner_label": "Shopify Platinum Partner",
+        "color_scheme": "scheme-6",
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -285,6 +327,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "try_before_you_buy_Mq8JtR",
     "product_list_fa6P9H"
   ]
 }
